@@ -9,6 +9,51 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			Psikotest.belongsToMany(models.Exam, {
+				foreignKey: "exam_id",
+				through: "PsikotestHasExams",
+				as: "exams",
+			});
+			Psikotest.belongsTo(models.Category_test, {
+				foreignKey: {
+					name: "category_test_id",
+				},
+			});
+			Psikotest.hasOne(models.Access_code, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Speed_prex_grade, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Accuracy_prex_grade, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Endurance_prex_grade, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Accumulation_speed, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Accumulation_accuracy, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasOne(models.Accumulation_endurance, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
 		}
 	}
 	Psikotest.init(
@@ -25,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: "Psikotest",
+			paranoid: true,
 		}
 	);
 	return Psikotest;

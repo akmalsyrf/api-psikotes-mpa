@@ -17,6 +17,12 @@ module.exports = {
 			question: {
 				type: Sequelize.TEXT("long"),
 			},
+			duration: {
+				type: Sequelize.TIME,
+			},
+			edition: {
+				type: Sequelize.STRING,
+			},
 			category_id: {
 				type: Sequelize.INTEGER,
 			},
@@ -35,6 +41,9 @@ module.exports = {
 				allowNull: false,
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			deletedAt: {
+				type: "TIMESTAMP",
 			},
 		});
 	},

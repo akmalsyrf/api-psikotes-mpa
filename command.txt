@@ -12,7 +12,7 @@ npx sequelize model:generate --name Category_test --attributes name:string,is_ac
 
 npx sequelize-cli model:generate --name Option --attributes option_text:text('long'),question_id:integer
 
-npx sequelize-cli model:generate --name Answer --attributes question_id:integer,description:text("long")
+npx sequelize-cli model:generate --name Answer --attributes question_id:integer,option_id:integer,description:text("long")
 
 npx sequelize model:generate --name Speed_prex_grade --attributes user_id:integer,psikotest:integer,exam_id:integer,qty:integer,qty_question:integer
 

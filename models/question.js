@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			Question.belongsToMany(models.Exam, {
+				foreignKey: "question_id",
 				through: "ExamHasQuestions",
 				as: "exams",
-				foreignKey: "question_id",
 			});
 			Question.hasMany(models.Option, {
 				foreignKey: {
@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
 			title: DataTypes.STRING,
 			question_code: DataTypes.STRING,
 			question: DataTypes.TEXT("long"),
+			duration: DataTypes.TIME,
+			edition: DataTypes.STRING,
 			category_id: DataTypes.INTEGER,
 			tag: DataTypes.STRING,
 			duration: DataTypes.TIME,
@@ -33,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: "Question",
+			paranoid: true,
 		}
 	);
 	return Question;

@@ -1,28 +1,18 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Accumulation_accuracies", {
+		await queryInterface.createTable("Exam_types", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			user_id: {
-				type: Sequelize.INTEGER,
+			name: {
+				type: Sequelize.STRING,
 			},
-			psikotest_id: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: "psikotests",
-					key: "id",
-				},
-			},
-			qty: {
-				type: Sequelize.INTEGER,
-			},
-			qty_question: {
-				type: Sequelize.INTEGER,
+			is_active: {
+				type: Sequelize.BOOLEAN,
 			},
 			createdAt: {
 				allowNull: false,
@@ -40,6 +30,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Accumulation_accuracies");
+		await queryInterface.dropTable("Exam_types");
 	},
 };

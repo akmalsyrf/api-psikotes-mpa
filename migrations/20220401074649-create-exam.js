@@ -16,6 +16,10 @@ module.exports = {
 			},
 			exam_type_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "exam_types",
+					key: "id",
+				},
 			},
 			question_qty: {
 				type: Sequelize.INTEGER,
@@ -41,6 +45,9 @@ module.exports = {
 				allowNull: false,
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			deletedAt: {
+				type: "TIMESTAMP",
 			},
 		});
 	},

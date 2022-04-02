@@ -1,28 +1,42 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Accumulation_accuracies", {
+		await queryInterface.createTable("Psikotests", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			user_id: {
-				type: Sequelize.INTEGER,
+			name: {
+				type: Sequelize.STRING,
 			},
-			psikotest_id: {
+			category_test_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "psikotests",
+					model: "category_tests",
 					key: "id",
 				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
-			qty: {
+			test_code: {
+				type: Sequelize.STRING,
+			},
+			open: {
+				type: Sequelize.DATE,
+			},
+			close: {
+				type: Sequelize.DATE,
+			},
+			quota: {
 				type: Sequelize.INTEGER,
 			},
-			qty_question: {
-				type: Sequelize.INTEGER,
+			description: {
+				type: Sequelize.TEXT("long"),
+			},
+			instruction: {
+				type: Sequelize.TEXT("long"),
 			},
 			createdAt: {
 				allowNull: false,
@@ -40,6 +54,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Accumulation_accuracies");
+		await queryInterface.dropTable("Psikotests");
 	},
 };

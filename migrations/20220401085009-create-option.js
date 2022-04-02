@@ -13,6 +13,12 @@ module.exports = {
 			},
 			question_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "questions",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			createdAt: {
 				allowNull: false,
@@ -23,6 +29,9 @@ module.exports = {
 				allowNull: false,
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			deletedAt: {
+				type: "TIMESTAMP",
 			},
 		});
 	},

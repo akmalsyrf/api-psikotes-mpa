@@ -1,36 +1,30 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Psikotests", {
+		await queryInterface.createTable("ExamHasQuestions", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			name: {
-				type: Sequelize.STRING,
-			},
-			category_test_id: {
+			exam_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "exams",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
-			test_code: {
-				type: Sequelize.STRING,
-			},
-			open: {
-				type: Sequelize.DATE,
-			},
-			close: {
-				type: Sequelize.DATE,
-			},
-			quota: {
+			question_id: {
 				type: Sequelize.INTEGER,
-			},
-			description: {
-				type: Sequelize.TEXT("long"),
-			},
-			instruction: {
-				type: Sequelize.TEXT("long"),
+				references: {
+					model: "questions",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			createdAt: {
 				allowNull: false,
@@ -45,6 +39,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Psikotests");
+		await queryInterface.dropTable("ExamHasQuestions");
 	},
 };

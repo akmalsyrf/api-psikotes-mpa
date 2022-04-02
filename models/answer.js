@@ -9,16 +9,28 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			Answer.belongsTo(models.Question, {
+				foreignKey: {
+					name: "question_id",
+				},
+			});
+			Answer.belongsTo(models.Option, {
+				foreignKey: {
+					name: "option_id",
+				},
+			});
 		}
 	}
 	Answer.init(
 		{
 			question_id: DataTypes.INTEGER,
+			option_id: DataTypes.INTEGER,
 			description: DataTypes.TEXT("long"),
 		},
 		{
 			sequelize,
 			modelName: "Answer",
+			paranoid: true,
 		}
 	);
 	return Answer;

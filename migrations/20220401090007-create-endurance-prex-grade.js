@@ -13,12 +13,30 @@ module.exports = {
 			},
 			psikotest_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "psikotests",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			from_exam_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "exams",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			to_exam_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "exams",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			percentage_progress: {
 				type: Sequelize.INTEGER,
@@ -35,6 +53,9 @@ module.exports = {
 				allowNull: false,
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			deletedAt: {
+				type: "TIMESTAMP",
 			},
 		});
 	},

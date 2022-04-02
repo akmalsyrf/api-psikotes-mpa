@@ -13,6 +13,10 @@ module.exports = {
 			},
 			psikotest_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "psikotests",
+					key: "id",
+				},
 			},
 			qty: {
 				type: Sequelize.INTEGER,
@@ -29,6 +33,9 @@ module.exports = {
 				allowNull: false,
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			deletedAt: {
+				type: "TIMESTAMP",
 			},
 		});
 	},

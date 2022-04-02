@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
 					name: "question_id",
 				},
 			});
+			Option.hasMany(models.Answer, {
+				foreignKey: {
+					name: "option_id",
+				},
+			});
 		}
 	}
 	Option.init(
@@ -24,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: "Option",
+			paranoid: true,
 		}
 	);
 	return Option;
