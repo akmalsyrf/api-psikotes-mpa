@@ -1,0 +1,30 @@
+npx sequelize-cli model:generate --name Exam --attributes name:string,exam_code:string,exam_type_id:integer,question_qty:integer,total_duration:time,tag:string,open:date,close:date
+
+npx sequelize-cli model:generate --name Question --attributes title:string,question_code:string,question:text('long'),category_id:integer,tag:string,duration:time
+
+npx sequelize-cli model:generate --name ExamHasQuestion --attributes exam_id:integer,question_id:integer
+
+npx sequelize model:generate --name Psikotest --attributes name:string,category_test_id:integer,test_code:string,open:date,close:date,quota:integer,description:text('long'),instruction:text('long')
+
+npx sequelize model:generate --name Access_code --attributes user_id:integer,psikotest_id:integer,access_code:string
+
+npx sequelize model:generate --name Category_test --attributes name:string,is_active:boolean
+
+npx sequelize-cli model:generate --name Option --attributes option_text:text('long'),question_id:integer
+
+npx sequelize-cli model:generate --name Answer --attributes question_id:integer,description:text("long")
+
+npx sequelize model:generate --name Speed_prex_grade --attributes user_id:integer,psikotest:integer,exam_id:integer,qty:integer,qty_question:integer
+
+npx sequelize-cli model:generate --name Accuracy_prex_grade --attributes user_id:integer,psikotest_id:integer,exam_id:integer,qty:integer,qty_question:integer
+
+npx sequelize-cli model:generate --name Endurance_prex_grade --attributes user_id:integer,psikotest_id:integer,from_exam_id:integer,to_exam_id:integer,percentage_progress:integer,difference_qty:integer
+
+npx sequelize-cli model:generate --name Accumulation_speed --attributes user_id:integer,psikotest_id:integer,qty:integer,qty_question:integer
+
+npx sequelize-cli model:generate --name Accumulation_accuracy --attributes user_id:integer,psikotest_id:integer,qty:integer,qty_question:integer
+
+npx sequelize-cli model:generate --name Accumulation_endurance --attributes user_id:integer,psikotest_id:integer,percentage_progress:integer
+
+npx sequelize-cli model:generate --name Intelligence_grade --attributes user_id:integer,psikotest_id:integer,correct_qty:integer,wrong_qty:integer,unanswered_qty:integer,total_question:integer
+
