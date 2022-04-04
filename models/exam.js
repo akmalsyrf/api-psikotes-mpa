@@ -24,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
 					name: "exam_type_id",
 				},
 			});
-			Exam.belongsTo(models.Psikotest, {
-				foreignKey: {
-					name: "psikotest_id",
-				},
-			});
 			Exam.hasOne(models.Speed_prex_grade, {
 				foreignKey: {
 					name: "exam_id",

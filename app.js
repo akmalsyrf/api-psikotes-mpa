@@ -6,6 +6,7 @@ var logger = require("morgan");
 const psikotestRouter = require("./app/psikotest/router");
 const questionRouter = require("./app/question/router");
 const examRouter = require("./app/exam/router");
+const categoryTestRouter = require("./app/category_test/router");
 
 var app = express();
 const baseUrl = "/api/v1";
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(baseUrl, psikotestRouter);
 app.use(baseUrl, questionRouter);
 app.use(baseUrl, examRouter);
+app.use(baseUrl, categoryTestRouter);
 
 module.exports = app;
