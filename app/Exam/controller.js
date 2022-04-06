@@ -25,45 +25,59 @@ exports.getAllExams = async (req, res) => {
 
 exports.getListExam = async (req, res) => {
 	try {
-		//check params
-		if (req.query.access_code && req.query.test_code && req.query.user_id) {
-			const { access_code, test_code, user_id } = req.query;
+		if (req.headers.authorization) {
+			//check params
+			if (req.query.access_code && req.query.test_code && req.query.user_id) {
+				const { access_code, test_code, user_id } = req.query;
 
-			//check existence test_code and access_code
-			const psikotest = await Psikotest.findOne({
-				where: {
-					test_code: test_code,
-				},
-				include: {
-					model: Access_code,
+				//check existence user_id
+				const url = `${process.env.AUTH_URL}/user`;
+				const getUser = await axios.get(url, {
+					headers: {
+						Authorization: req.headers.authorization,
+					},
+				});
+				const user = getUser.data.user.filter((item) => item.id === Number(user_id));
+
+				//check existence test_code and access_code
+				const psikotest = await Psikotest.findOne({
 					where: {
-						access_code: access_code,
+						test_code: test_code,
 					},
-				},
-			});
-			if (psikotest !== null) {
-				const exam = await Exam.findAll({
-					order: [["createdAt", "DESC"]],
+					include: {
+						model: Access_code,
+						where: {
+							access_code: access_code,
+						},
+					},
 				});
+				if (psikotest !== null && user.length > 0) {
+					const exam = await Exam.findAll();
 
-				res.status(200).json({
-					status: "success",
-					data: {
-						idExam: exam.map((item) => {
-							return item.id;
-						}),
-					},
-				});
+					res.status(200).json({
+						status: "success",
+						data: {
+							idExam: exam.map((item) => {
+								return item.id;
+							}),
+						},
+					});
+				} else {
+					res.status(403).json({
+						status: "failed",
+						message: "access_code, test_code, or user_id isn't valid",
+					});
+				}
 			} else {
 				res.status(403).json({
 					status: "failed",
-					message: "access_code or test_code isn't valid",
+					message: "You must provide access_code, test_code, and user_id",
 				});
 			}
 		} else {
 			res.status(403).json({
 				status: "failed",
-				message: "You must provide access_code, test_code, and user_id",
+				message: "unauthorized",
 			});
 		}
 	} catch (err) {
@@ -156,22 +170,6 @@ exports.deleteExam = async (req, res) => {
 			data: {
 				exam,
 			},
-		});
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({
-			status: "failed",
-			message: "Server error",
-		});
-	}
-};
-
-exports.coba = async (req, res) => {
-	try {
-		const response = await axios.get(`https://jsonplaceholder.typicode.com/todos`);
-		res.status(200).json({
-			status: "success",
-			data: response.data,
 		});
 	} catch (error) {
 		console.log(error);
