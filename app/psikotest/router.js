@@ -11,5 +11,4 @@ router.post("/psikotes/ketelitian/calculate", accuracyTestAccumulation);
 router.post("/psikotes/ketahanan/send-answer", enduranceTest);
 router.post("/psikotes/ketahanan/calculate", enduranceTestAccumulation);
 router.post("/psikotes/send-answer", sendAnswerPsikotest);
-
 module.exports = router;

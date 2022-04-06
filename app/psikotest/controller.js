@@ -322,12 +322,6 @@ exports.enduranceTest = async (req, res) => {
 				res.status(200).json({
 					status: "success",
 					message: "Endurance test success",
-					// data: {
-					// 	from_exam_id,
-					// 	to_exam_id,
-					// 	difference_qty,
-					// 	percentage_progress,
-					// },
 				});
 			} else {
 				res.status(403).json({
@@ -463,6 +457,17 @@ exports.sendAnswerPsikotest = async (req, res) => {
 
 					//store data student answer
 					await Student_answer.create({ user_id, exam_id: Number(exam_id), question_id: item.question_id, option_id: Number(item.answer) });
+
+					// const student_answer = await Student_answer.findOne({
+					// 	where: {
+					// 		option_id: Number(item.answer),
+					// 		question_id: item.question_id,
+					// 	},
+					// });
+
+					// if(student_answer !== null){
+					// 	qty_ketepatan += 1;
+					// }
 
 					//store data accuracy and speed
 					if (i === data.length - 1) {
