@@ -31,13 +31,12 @@ exports.getListExam = async (req, res) => {
 				const { access_code, test_code, user_id } = req.query;
 
 				//check existence user_id
-				const url = `${process.env.AUTH_URL}/user`;
+				const url = `${process.env.AUTH_URL}/user/${Number(user_id)}`;
 				const getUser = await axios.get(url, {
 					headers: {
 						Authorization: req.headers.authorization,
 					},
 				});
-				const user = getUser.data.user.filter((item) => item.id === Number(user_id));
 
 				//check existence test_code and access_code
 				const psikotest = await Psikotest.findOne({
@@ -48,10 +47,11 @@ exports.getListExam = async (req, res) => {
 						model: Access_code,
 						where: {
 							access_code: access_code,
+							user_id: user_id,
 						},
 					},
 				});
-				if (psikotest !== null && user.length > 0) {
+				if (psikotest !== null && getUser.data.user !== null) {
 					const exam = await Exam.findAll();
 
 					res.status(200).json({

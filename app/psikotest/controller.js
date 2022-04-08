@@ -1,5 +1,19 @@
 const axios = require("axios");
-const { Psikotest, Speed_prex_grade, Accuracy_prex_grade, Endurance_prex_grade, Access_code, Accumulation_speed, Accumulation_accuracy, Accumulation_endurance, Question, Option, Answer, Student_answer } = require("../../models");
+const {
+	Psikotest,
+	Speed_prex_grade,
+	Accuracy_prex_grade,
+	Endurance_prex_grade,
+	Intelligence_grade,
+	Access_code,
+	Accumulation_speed,
+	Accumulation_accuracy,
+	Accumulation_endurance,
+	Question,
+	Option,
+	Answer,
+	Student_answer,
+} = require("../../models");
 
 exports.getAllPsikotest = async (req, res) => {
 	try {
@@ -13,6 +27,86 @@ exports.getAllPsikotest = async (req, res) => {
 			},
 		});
 	} catch (err) {
+		res.status(500).json({
+			status: "failed",
+			message: "Server error",
+		});
+	}
+};
+
+exports.showPsikotest = async (req, res) => {
+	try {
+		const psikotest = await Psikotest.findOne({
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.status(200).json({
+			status: "success",
+			data: {
+				psikotest,
+			},
+		});
+	} catch (err) {
+		res.status(500).json({
+			status: "failed",
+			message: "Server error",
+		});
+	}
+};
+
+exports.getGradePrecision = async (req, res) => {
+	try {
+		if (req.query.test_code && req.query.access_code) {
+			const { test_code, access_code } = req.query;
+
+			//check existence test_code and access_code
+			let psikotest = await Psikotest.findOne({
+				where: {
+					test_code: test_code,
+				},
+				include: [
+					{
+						model: Access_code,
+						where: {
+							access_code: access_code,
+						},
+					},
+					{ model: Speed_prex_grade },
+					{ model: Accuracy_prex_grade },
+					{ model: Endurance_prex_grade },
+				],
+			});
+			psikotest = JSON.parse(JSON.stringify(psikotest));
+
+			if (psikotest !== null) {
+				const speed_prex_grade = psikotest.Speed_prex_grades.map((item) => item.qty);
+				const accuracy_prex_grade = psikotest.Accuracy_prex_grades.map((item) => item.qty);
+				const endurance_prex_grade = psikotest.Endurance_prex_grades.map((item) => item.percentage_progress);
+
+				res.status(200).json({
+					status: "success",
+					data: {
+						// psikotest,
+						speed_prex_grade,
+						accuracy_prex_grade,
+						endurance_prex_grade,
+					},
+				});
+			} else {
+				res.status(403).json({
+					status: "failed",
+					message: "access_code or test_code isn't valid",
+				});
+			}
+		} else {
+			res.status(403).json({
+				status: "failed",
+				message: "You must provide a test_code, user_id and access_code",
+			});
+		}
+	} catch (error) {
+		console.log(error);
 		res.status(500).json({
 			status: "failed",
 			message: "Server error",
@@ -34,6 +128,7 @@ exports.speedTest = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: req.query.user,
 					},
 				},
 			});
@@ -92,6 +187,7 @@ exports.speedTestAccumulation = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: user_id,
 					},
 				},
 			});
@@ -120,6 +216,11 @@ exports.speedTestAccumulation = async (req, res) => {
 					data: {
 						accumulation_speed,
 					},
+				});
+			} else {
+				res.status(403).json({
+					status: "failed",
+					message: "access_code or test_code isn't valid",
 				});
 			}
 		} else {
@@ -151,6 +252,7 @@ exports.accuracyTest = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: req.query.user,
 					},
 				},
 			});
@@ -159,7 +261,7 @@ exports.accuracyTest = async (req, res) => {
 
 				let qty = 0;
 				let qty_question;
-				await data.forEach(async (item, i) => {
+				data.forEach(async (item, i) => {
 					const exam_id = item.exam_id;
 
 					//get qty of question
@@ -174,8 +276,8 @@ exports.accuracyTest = async (req, res) => {
 						},
 						include: [{ model: Option }, { model: Answer }],
 					});
-					const options = JSON.parse(JSON.stringify(question.Options));
-					const answer = JSON.parse(JSON.stringify(question.Answer));
+					const options = await JSON.parse(JSON.stringify(question.Options));
+					const answer = await JSON.parse(JSON.stringify(question.Answer));
 
 					//check answer
 					if (options[item.answer].id === Number(answer.option_id)) {
@@ -229,6 +331,7 @@ exports.accuracyTestAccumulation = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: user_id,
 					},
 				},
 			});
@@ -258,6 +361,11 @@ exports.accuracyTestAccumulation = async (req, res) => {
 						accumulation_accuracy,
 					},
 				});
+			} else {
+				res.status(403).json({
+					status: "failed",
+					message: "access_code or test_code isn't valid",
+				});
 			}
 		} else {
 			res.status(403).json({
@@ -276,8 +384,8 @@ exports.accuracyTestAccumulation = async (req, res) => {
 
 exports.enduranceTest = async (req, res) => {
 	try {
-		if (req.body.test_code && req.body.access_code) {
-			const { test_code, access_code } = req.body;
+		if (req.query.test_code && req.query.access_code && req.query.user_id) {
+			const { test_code, access_code, user_id } = req.query;
 
 			//check existence test_code and access_code
 			const psikotest = await Psikotest.findOne({
@@ -288,12 +396,12 @@ exports.enduranceTest = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: user_id,
 					},
 				},
 			});
 
 			if (psikotest !== null) {
-				const user_id = Number(req.query.user);
 				const psikotest_id = psikotest.id;
 				const accuracyTest = await Accuracy_prex_grade.findAll({
 					order: [["id", "ASC"]],
@@ -358,6 +466,7 @@ exports.enduranceTestAccumulation = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: user_id,
 					},
 				},
 			});
@@ -409,6 +518,95 @@ exports.enduranceTestAccumulation = async (req, res) => {
 	}
 };
 
+exports.intelligenceTest = async (req, res) => {
+	try {
+		if (req.body.test_code && req.body.access_code) {
+			const { test_code, access_code, data } = req.body;
+
+			//check existence test_code and access_code
+			const psikotest = await Psikotest.findOne({
+				where: {
+					test_code: test_code,
+				},
+				include: {
+					model: Access_code,
+					where: {
+						access_code: access_code,
+						user_id: req.query.user,
+					},
+				},
+			});
+			if (psikotest !== null) {
+				const user_id = Number(req.query.user);
+
+				let qty = 0;
+				let qty_question;
+				await data.forEach(async (item, i) => {
+					const exam_id = item.exam_id;
+
+					//get qty of question
+					const url = `${process.env.SERVER_URL}/exam/${Number(exam_id)}`;
+					const getQuestionInExam = await axios.get(url);
+					qty_question = getQuestionInExam.data.data.questions.length;
+
+					//a,c,d,e = 0,1,2,3,4
+					const question = await Question.findOne({
+						where: {
+							id: item.question_id,
+						},
+						include: [{ model: Option }, { model: Answer }],
+					});
+					const options = JSON.parse(JSON.stringify(question.Options));
+					const answer = JSON.parse(JSON.stringify(question.Answer));
+
+					//check answer
+					if (options[item.answer].id === Number(answer.option_id)) {
+						qty += 1;
+					}
+
+					//store data student answer
+					await Student_answer.create({ user_id, exam_id: Number(exam_id), question_id: item.question_id, option_id: Number(item.answer) });
+
+					//store data accuracy test in last looping data
+					if (i === data.length - 1) {
+						let correct_qty = qty;
+						let wrong_qty = qty_question - qty;
+						let unanswered_qty = qty_question - data.length;
+						let total_question = qty_question;
+						await Intelligence_grade.create({ user_id, psikotest_id: psikotest.id, correct_qty, wrong_qty, unanswered_qty, total_question });
+						res.status(200).json({
+							status: "success",
+							message: "Accuracy test success",
+							data: {
+								correct_qty,
+								wrong_qty,
+								unanswered_qty,
+								total_question,
+							},
+						});
+					}
+				});
+			} else {
+				res.status(403).json({
+					status: "failed",
+					message: "access_code or test_code isn't valid",
+				});
+			}
+		} else {
+			res.status(403).json({
+				status: "failed",
+				message: "You must provide a test_code, user_id and access_code",
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			status: "failed",
+			message: "Server error",
+		});
+	}
+};
+
 exports.sendAnswerPsikotest = async (req, res) => {
 	try {
 		if (req.body.test_code && req.body.access_code) {
@@ -423,6 +621,7 @@ exports.sendAnswerPsikotest = async (req, res) => {
 					model: Access_code,
 					where: {
 						access_code: access_code,
+						user_id: req.query.user,
 					},
 				},
 			});
@@ -465,14 +664,26 @@ exports.sendAnswerPsikotest = async (req, res) => {
 					// 	},
 					// });
 
-					// if(student_answer !== null){
+					// if (student_answer !== null) {
 					// 	qty_ketepatan += 1;
 					// }
+					// console.log(student_answer);
+					// console.log(student_answer.option_id);
+					// console.log(options[item.answer].id);
 
-					//store data accuracy and speed
+					//store data accuracy, intelligence, and speed
 					if (i === data.length - 1) {
+						//kecepatan
 						await Speed_prex_grade.create({ user_id, psikotest_id: psikotest.id, exam_id: Number(exam_id), qty: qty_kecepatan, qty_question });
+						//ketelitian
 						await Accuracy_prex_grade.create({ user_id, psikotest_id: psikotest.id, exam_id: Number(exam_id), qty: qty_ketepatan, qty_question });
+
+						//kecerdasan
+						let correct_qty = qty_ketepatan;
+						let wrong_qty = qty_question - qty_ketepatan;
+						let unanswered_qty = qty_question - data.length;
+						let total_question = qty_question;
+						await Intelligence_grade.create({ user_id, psikotest_id: psikotest.id, correct_qty, wrong_qty, unanswered_qty, total_question });
 					}
 				});
 				res.status(200).json({

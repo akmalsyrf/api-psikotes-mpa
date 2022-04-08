@@ -26,14 +26,7 @@ exports.showQuestion = async (req, res) => {
 			where: {
 				id: req.params.id,
 			},
-			include: [
-				{
-					model: Answer,
-				},
-				{
-					model: Option,
-				},
-			],
+			include: [{ model: Answer }, { model: Option }],
 		});
 		res.status(200).json({
 			status: "success",

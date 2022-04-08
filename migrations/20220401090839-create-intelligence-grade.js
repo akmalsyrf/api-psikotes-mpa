@@ -13,6 +13,12 @@ module.exports = {
 			},
 			psikotest_id: {
 				type: Sequelize.INTEGER,
+				references: {
+					model: "psikotests",
+					key: "id",
+				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
 			correct_qty: {
 				type: Sequelize.INTEGER,

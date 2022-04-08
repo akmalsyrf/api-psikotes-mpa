@@ -19,37 +19,42 @@ module.exports = (sequelize, DataTypes) => {
 					name: "category_test_id",
 				},
 			});
-			Psikotest.hasOne(models.Access_code, {
+			Psikotest.hasMany(models.Access_code, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Speed_prex_grade, {
+			Psikotest.hasMany(models.Intelligence_grade, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Accuracy_prex_grade, {
+			Psikotest.hasMany(models.Speed_prex_grade, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Endurance_prex_grade, {
+			Psikotest.hasMany(models.Accuracy_prex_grade, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Accumulation_speed, {
+			Psikotest.hasMany(models.Endurance_prex_grade, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Accumulation_accuracy, {
+			Psikotest.hasMany(models.Accumulation_speed, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasOne(models.Accumulation_endurance, {
+			Psikotest.hasMany(models.Accumulation_accuracy, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasMany(models.Accumulation_endurance, {
 				foreignKey: {
 					name: "psikotest_id",
 				},
