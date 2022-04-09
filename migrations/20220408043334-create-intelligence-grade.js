@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Accumulation_speeds", {
+		await queryInterface.createTable("Intelligence_grades", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -14,18 +14,17 @@ module.exports = {
 			psikotest_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "psikotests",
+					model: "Psikotests",
 					key: "id",
 				},
+				onUpdate: "CASCADE",
+				onDelete: "CASCADE",
 			},
-			qty: {
+			grade: {
 				type: Sequelize.INTEGER,
 			},
-			qty_question: {
+			gradeOneHundred: {
 				type: Sequelize.INTEGER,
-			},
-			time: {
-				type: Sequelize.DATE,
 			},
 			createdAt: {
 				allowNull: false,
@@ -37,12 +36,9 @@ module.exports = {
 				type: "TIMESTAMP",
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
-			deletedAt: {
-				type: "TIMESTAMP",
-			},
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Accumulation_speeds");
+		await queryInterface.dropTable("Intelligence_grades");
 	},
 };

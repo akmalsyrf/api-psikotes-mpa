@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			exam_id: DataTypes.INTEGER,
 			question_id: DataTypes.INTEGER,
 			option_id: DataTypes.INTEGER,
+			time: DataTypes.DATE,
 		},
 		{
 			sequelize,

@@ -24,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
 					name: "psikotest_id",
 				},
 			});
-			Psikotest.hasMany(models.Intelligence_grade, {
-				foreignKey: {
-					name: "psikotest_id",
-				},
-			});
 			Psikotest.hasMany(models.Speed_prex_grade, {
 				foreignKey: {
 					name: "psikotest_id",
@@ -55,6 +50,16 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			});
 			Psikotest.hasMany(models.Accumulation_endurance, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasMany(models.Intelligence_answer, {
+				foreignKey: {
+					name: "psikotest_id",
+				},
+			});
+			Psikotest.hasMany(models.Intelligence_grade, {
 				foreignKey: {
 					name: "psikotest_id",
 				},

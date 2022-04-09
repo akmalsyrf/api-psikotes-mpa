@@ -30,3 +30,4 @@ npx sequelize-cli model:generate --name Intelligence_grade --attributes user_id:
 
 npx sequelize-cli model:generate --name Student_answer --attributes user_id:integer,exam_id:integer,question_id:integer,option_id:integer
 
+npx sequelize-cli model:generate --name Intelligence_answer --attributes user_id:integer,psikotest_id:integer,correct_qty:integer,wrong_qty:integer,unanswered_qty:integer,total_question:integer

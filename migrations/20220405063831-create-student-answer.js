@@ -20,6 +20,9 @@ module.exports = {
 			option_id: {
 				type: Sequelize.INTEGER,
 			},
+			time: {
+				type: Sequelize.DATE,
+			},
 			createdAt: {
 				allowNull: false,
 				type: "TIMESTAMP",

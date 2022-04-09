@@ -1,15 +1,27 @@
 const express = require("express");
 const router = express.Router();
 
-const { getGradePrecision, speedTest, speedTestAccumulation, accuracyTest, accuracyTestAccumulation, enduranceTest, sendAnswerPsikotest, enduranceTestAccumulation, intelligenceTest } = require("./controller");
+const { getAllPsikotest, showPsikotest } = require("./controller");
+const { getGradePrecision, sendAnswerPsikotest, accumulationPsikotest, enduranceTest } = require("./controller/kecermatan");
+const { intelligenceTest } = require("./controller/kecerdasan");
 
-router.get("/psikotes/grade-precision", getGradePrecision);
-router.post("/psikotes/kecepatan/send-answer", speedTest);
-router.post("/psikotes/kecepatan/calculate", speedTestAccumulation);
-router.post("/psikotes/ketelitian/send-answer", accuracyTest);
-router.post("/psikotes/ketelitian/calculate", accuracyTestAccumulation);
-router.post("/psikotes/ketahanan/send-answer", enduranceTest);
-router.post("/psikotes/ketahanan/calculate", enduranceTestAccumulation);
-router.post("/psikotes/kecerdasan/send-answer", intelligenceTest);
-router.post("/psikotes/send-answer", sendAnswerPsikotest);
+//kecermatan
+const kecermatan = `/psikotes/kecermatan`;
+// router.post(`${kecermatan}/kecepatan/send-answer`, speedTest);
+// router.post(`${kecermatan}/kecepatan/calculate`, speedTestAccumulation);
+
+// router.post(`${kecermatan}/ketelitian/send-answer`, accuracyTest);
+// router.post(`${kecermatan}/ketelitian/calculate`, accuracyTestAccumulation);
+
+router.post(`${kecermatan}/ketahanan/send-answer`, enduranceTest);
+// router.post(`${kecermatan}/ketahanan/calculate`, enduranceTestAccumulation);
+
+router.get(`${kecermatan}/grade-precision`, getGradePrecision);
+router.post(`${kecermatan}/send-answer`, sendAnswerPsikotest);
+router.post(`${kecermatan}/calculate`, accumulationPsikotest);
+
+//kecerdasan
+const kecerdasan = `/psikotes/kecerdasan`;
+router.post(`${kecerdasan}/send-answer`, intelligenceTest);
+
 module.exports = router;

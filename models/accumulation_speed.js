@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 			psikotest_id: DataTypes.INTEGER,
 			qty: DataTypes.INTEGER,
 			qty_question: DataTypes.INTEGER,
+			time: DataTypes.DATE,
 		},
 		{
 			sequelize,
