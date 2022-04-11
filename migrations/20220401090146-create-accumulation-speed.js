@@ -24,9 +24,6 @@ module.exports = {
 			qty_question: {
 				type: Sequelize.INTEGER,
 			},
-			time: {
-				type: Sequelize.DATE,
-			},
 			createdAt: {
 				allowNull: false,
 				type: "TIMESTAMP",

@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
 			sequelize,
 			modelName: "Student_answer",
 			paranoid: true,
+			// hooks: {
+			// 	beforeCreate: (student_answer, options) => {
+			// 		student_answer.dataValues.createdAt = new Date().toISOString().replace(/T/, " ").replace(/\..+/g, "");
+			// 		student_answer.dataValues.updatedAt = new Date().toISOString().replace(/T/, " ").replace(/\..+/g, "");
+			// 	},
+			// },
 		}
 	);
 	return Student_answer;

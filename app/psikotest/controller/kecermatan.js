@@ -362,6 +362,13 @@ exports.enduranceTest = async (req, res) => {
 				let percentage_progress;
 				let difference_qty;
 
+				if (accuracyTest.length <= 1) {
+					res.status(400).json({
+						status: "failed",
+						message: "You must provide at least 2 accuracy test data",
+					});
+				}
+
 				for (let i = 1; i < accuracyTest.length; i++) {
 					from_exam_id = accuracyTest[i - 1].exam_id;
 					to_exam_id = accuracyTest[i].exam_id;
@@ -370,13 +377,12 @@ exports.enduranceTest = async (req, res) => {
 
 					if (i >= 1) {
 						await Endurance_prex_grade.create({ user_id, psikotest_id, from_exam_id, to_exam_id, percentage_progress, difference_qty });
+						res.status(200).json({
+							status: "success",
+							message: "Endurance test success",
+						});
 					}
 				}
-
-				res.status(200).json({
-					status: "success",
-					message: "Endurance test success",
-				});
 			} else {
 				res.status(403).json({
 					status: "failed",
@@ -511,12 +517,12 @@ exports.sendAnswerPsikotest = async (req, res) => {
 					}
 
 					//store data student answer
-					await Student_answer.create({ user_id, exam_id: Number(exam_id), question_id: item.question_id, option_id: Number(item.answer) });
+					await Student_answer.create({ user_id, exam_id: Number(exam_id), question_id: item.question_id, option_id: Number(item.answer), time: storeTime });
 
 					//store data accuracy, intelligence, and speed
 					if (i === data.length - 1) {
 						//kecepatan
-						await Speed_prex_grade.create({ user_id, psikotest_id: psikotest.id, exam_id: Number(exam_id), qty: qty_kecepatan, qty_question, time: storeTime });
+						await Speed_prex_grade.create({ user_id, psikotest_id: psikotest.id, exam_id: Number(exam_id), qty: qty_kecepatan, qty_question });
 						//ketelitian
 						await Accuracy_prex_grade.create({ user_id, psikotest_id: psikotest.id, exam_id: Number(exam_id), qty: qty_ketepatan, qty_question });
 					}
