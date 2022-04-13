@@ -1,42 +1,33 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Questions", {
+		await queryInterface.createTable("Character_personalities", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			title: {
+			name: {
 				type: Sequelize.STRING,
 			},
-			question_code: {
-				type: Sequelize.STRING,
-			},
-			question: {
-				type: Sequelize.TEXT("long"),
-			},
-			duration: {
-				type: Sequelize.TIME,
-			},
-			edition: {
+			slug: {
 				type: Sequelize.STRING,
 			},
 			category_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "category_subjects",
+					model: "category_characters",
 					key: "id",
 				},
 				onUpdate: "CASCADE",
 				onDelete: "CASCADE",
 			},
-			tag: {
+			code_character: {
 				type: Sequelize.STRING,
 			},
-			duration: {
-				type: Sequelize.TIME,
+			description: {
+				type: Sequelize.TEXT("long"),
 			},
 			createdAt: {
 				allowNull: false,
@@ -54,6 +45,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Questions");
+		await queryInterface.dropTable("Character_personalities");
 	},
 };

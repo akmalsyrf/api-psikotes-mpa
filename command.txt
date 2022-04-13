@@ -1,5 +1,7 @@
 npx sequelize-cli model:generate --name Exam --attributes name:string,exam_code:string,exam_type_id:integer,question_qty:integer,total_duration:time,tag:string,open:date,close:date
 
+npx sequelize-cli model:generate --name category_subject --attributes id:integer,name:string
+
 npx sequelize-cli model:generate --name Question --attributes title:string,question_code:string,question:text('long'),category_id:integer,tag:string,duration:time
 
 npx sequelize-cli model:generate --name ExamHasQuestion --attributes exam_id:integer,question_id:integer
@@ -31,3 +33,17 @@ npx sequelize-cli model:generate --name Intelligence_grade --attributes user_id:
 npx sequelize-cli model:generate --name Student_answer --attributes user_id:integer,exam_id:integer,question_id:integer,option_id:integer
 
 npx sequelize-cli model:generate --name Intelligence_answer --attributes user_id:integer,psikotest_id:integer,correct_qty:integer,wrong_qty:integer,unanswered_qty:integer,total_question:integer
+
+npx sequelize-cli model:generate --name Category_measurement --attributes name:string
+
+npx sequelize-cli model:generate --name Measurement --attributes name:string,measurement_code:string,category_id:integer
+
+npx sequelize-cli model:generate --name MeasHasOption --attributes measurement_id:integer,option_id:integer
+
+npx sequelize-cli model:generate --name Category_character --attributes name:string
+
+npx sequelize-cli model:generate --name Character_personalities --attributes name:string,slug:string,category_id:integer,code_character:string,description:text("long")
+
+npx sequelize-cli model:generate --name CharHasMeas --attributes character_id:integer,measurement_id:integer
+
+npx sequelize-cli model:generate --name QuestionHasCategoryMeas --attributes question_id:integer,cat_meas:integer
