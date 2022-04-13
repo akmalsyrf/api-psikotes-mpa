@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 				as: "exams",
 			});
 			Question.belongsToMany(models.Category_measurement, {
-				foreignKey: "measurement_id",
+				foreignKey: "cat_meas_id",
 				through: "QuestionHasMeas",
 				as: "category_measurements",
 			});
@@ -30,6 +30,16 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			});
 			Question.hasOne(models.Answer, {
+				foreignKey: {
+					name: "question_id",
+				},
+			});
+			Question.hasMany(models.Student_answer, {
+				foreignKey: {
+					name: "question_id",
+				},
+			});
+			Question.hasMany(models.Character_answer, {
 				foreignKey: {
 					name: "question_id",
 				},

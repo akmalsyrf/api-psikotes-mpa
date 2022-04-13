@@ -9,6 +9,21 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			Student_answer.belongsTo(models.Question, {
+				foreignKey: {
+					name: "question_id",
+				},
+			});
+			Student_answer.belongsTo(models.Option, {
+				foreignKey: {
+					name: "option_id",
+				},
+			});
+			Student_answer.belongsTo(models.Exam, {
+				foreignKey: {
+					name: "exam_id",
+				},
+			});
 		}
 	}
 	Student_answer.init(

@@ -47,3 +47,7 @@ npx sequelize-cli model:generate --name Character_personalities --attributes nam
 npx sequelize-cli model:generate --name CharHasMeas --attributes character_id:integer,measurement_id:integer
 
 npx sequelize-cli model:generate --name QuestionHasCategoryMeas --attributes question_id:integer,cat_meas:integer
+
+npx sequelize-cli model:generate --name Character_answer --attributes user_id:integer,question_id:integer,option_id:integer
+
+npx sequelize-cli model:generate --name Grade_kepribadian --attributes user_id:integer,introvert_percentage:integer,ekstrovert_percentage:integer,realistik_percentage:integer,visioner_percentage:integer,emosional_percentage:integer,rasional_percentage:integer,improvisasi_percentage:integer,perencana_percentage:integer,tegas_percentage:integer,waspada_percentage:integer

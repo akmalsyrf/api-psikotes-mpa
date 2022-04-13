@@ -1,41 +1,41 @@
-const { Psikotest } = require("../../models");
+const { Character_personalities, Measurement } = require("../../models");
 
-exports.getAllPsikotest = async (req, res) => {
+exports.getAllPersonalities = async (req, res) => {
 	try {
-		const psikotest = await Psikotest.findAll({
-			order: [["createdAt", "DESC"]],
-		});
+		const personalities = await Character_personalities.findAll();
 		res.status(200).json({
 			status: "success",
-			data: {
-				psikotest,
-			},
+			data: { personalities },
 		});
-	} catch (err) {
+	} catch (error) {
 		res.status(500).json({
 			status: "failed",
-			message: "Server error",
+			message: "Server Error",
 		});
 	}
 };
 
-exports.showPsikotest = async (req, res) => {
+exports.detailPersonality = async (req, res) => {
 	try {
-		const psikotest = await Psikotest.findOne({
+		const personalities = await Character_personalities.findOne({
 			where: {
 				id: req.params.id,
 			},
+			include: [
+				{
+					model: Measurement,
+					as: "measurements",
+				},
+			],
 		});
 		res.status(200).json({
 			status: "success",
-			data: {
-				psikotest,
-			},
+			data: { personalities },
 		});
-	} catch (err) {
+	} catch (error) {
 		res.status(500).json({
 			status: "failed",
-			message: "Server error",
+			message: "Server Error",
 		});
 	}
 };

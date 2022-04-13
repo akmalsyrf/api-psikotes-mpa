@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			Character_personalities.belongsToMany(models.Measurement, {
-				foreignKey: "character_id",
+				foreignKey: "measurement_id",
 				through: "CharHasMeas",
 				as: "measurements",
 			});

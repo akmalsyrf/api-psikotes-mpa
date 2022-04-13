@@ -44,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
 					name: "to_exam_id",
 				},
 			});
+			Exam.hasMany(models.Student_answer, {
+				foreignKey: {
+					name: "exam_id",
+				},
+			});
 		}
 	}
 	Exam.init(

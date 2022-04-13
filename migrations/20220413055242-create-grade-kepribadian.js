@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("Student_answers", {
+		await queryInterface.createTable("Grade_kepribadians", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -11,35 +11,35 @@ module.exports = {
 			user_id: {
 				type: Sequelize.INTEGER,
 			},
-			exam_id: {
+			introvert_percentage: {
 				type: Sequelize.INTEGER,
-				references: {
-					model: "exams",
-					key: "id",
-				},
-				onUpdate: "CASCADE",
-				onDelete: "CASCADE",
 			},
-			question_id: {
+			ekstrovert_percentage: {
 				type: Sequelize.INTEGER,
-				references: {
-					model: "questions",
-					key: "id",
-				},
-				onUpdate: "CASCADE",
-				onDelete: "CASCADE",
 			},
-			option_id: {
+			realistik_percentage: {
 				type: Sequelize.INTEGER,
-				references: {
-					model: "options",
-					key: "id",
-				},
-				onUpdate: "CASCADE",
-				onDelete: "CASCADE",
 			},
-			time: {
-				type: Sequelize.DATE,
+			visioner_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			emosional_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			rasional_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			improvisasi_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			perencana_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			tegas_percentage: {
+				type: Sequelize.INTEGER,
+			},
+			waspada_percentage: {
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: false,
@@ -57,6 +57,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Student_answers");
+		await queryInterface.dropTable("Grade_kepribadians");
 	},
 };

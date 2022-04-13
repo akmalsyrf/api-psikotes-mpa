@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			Option.belongsToMany(models.Measurement, {
-				foreignKey: "option_id",
+				foreignKey: "measurement_id",
 				through: "MeasHasOptions",
 				as: "measurements",
 			});
@@ -20,6 +20,16 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			});
 			Option.hasMany(models.Answer, {
+				foreignKey: {
+					name: "option_id",
+				},
+			});
+			Option.hasMany(models.Student_answer, {
+				foreignKey: {
+					name: "option_id",
+				},
+			});
+			Option.hasMany(models.Character_answer, {
 				foreignKey: {
 					name: "option_id",
 				},
