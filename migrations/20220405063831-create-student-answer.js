@@ -14,7 +14,7 @@ module.exports = {
 			exam_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "exams",
+					model: "Exams",
 					key: "id",
 				},
 				onUpdate: "CASCADE",
@@ -23,7 +23,7 @@ module.exports = {
 			question_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "questions",
+					model: "Questions",
 					key: "id",
 				},
 				onUpdate: "CASCADE",
@@ -32,7 +32,7 @@ module.exports = {
 			option_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: "options",
+					model: "Options",
 					key: "id",
 				},
 				onUpdate: "CASCADE",
