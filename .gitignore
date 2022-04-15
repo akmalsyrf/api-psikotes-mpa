@@ -1,1 +1,4 @@
+.env
 node_modules
+post-body.txt
+command.txt
