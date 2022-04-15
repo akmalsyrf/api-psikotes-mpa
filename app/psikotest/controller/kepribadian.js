@@ -150,6 +150,8 @@ exports.showTestResult = async (req, res) => {
 			pikiran = "Ekstrovert";
 		} else {
 			pikiran = "Introvert/Ekstrovert";
+			// introvert_percentage += 1
+			// ekstrovert_percentage -= 1
 		}
 
 		//energi
