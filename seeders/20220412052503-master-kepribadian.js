@@ -862,7 +862,7 @@ module.exports = {
 				},
 				{
 					character_id: 23,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 23,
@@ -885,7 +885,7 @@ module.exports = {
 				},
 				{
 					character_id: 24,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 24,
@@ -908,7 +908,7 @@ module.exports = {
 				},
 				{
 					character_id: 25,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 25,
@@ -931,7 +931,7 @@ module.exports = {
 				},
 				{
 					character_id: 26,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 26,
@@ -954,7 +954,7 @@ module.exports = {
 				},
 				{
 					character_id: 27,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 27,
@@ -977,7 +977,7 @@ module.exports = {
 				},
 				{
 					character_id: 28,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 28,
@@ -1000,7 +1000,7 @@ module.exports = {
 				},
 				{
 					character_id: 29,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 29,
@@ -1023,7 +1023,7 @@ module.exports = {
 				},
 				{
 					character_id: 30,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 30,
@@ -1046,11 +1046,11 @@ module.exports = {
 				},
 				{
 					character_id: 31,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 31,
-					measurement_id: 4,
+					measurement_id: 5,
 				},
 				{
 					character_id: 31,
@@ -1069,11 +1069,11 @@ module.exports = {
 				},
 				{
 					character_id: 32,
-					measurement_id: 4,
+					measurement_id: 3,
 				},
 				{
 					character_id: 32,
-					measurement_id: 4,
+					measurement_id: 5,
 				},
 				{
 					character_id: 32,

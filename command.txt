@@ -1,3 +1,12 @@
+npx sequelize db:seed --seed 20220412052503-master-kepribadian
+npx sequelize db:seed --seed 20220412073450-master-kecermatan
+npx sequelize db:seed --seed 20220413062951-question-has-category-meas
+npx sequelize db:seed --seed 20220413071620-meas-has-options.js
+
+
+
+
+
 npx sequelize-cli model:generate --name Exam --attributes name:string,exam_code:string,exam_type_id:integer,question_qty:integer,total_duration:time,tag:string,open:date,close:date
 
 npx sequelize-cli model:generate --name category_subject --attributes id:integer,name:string
