@@ -9,15 +9,15 @@ module.exports = {
 			[
 				{
 					name: "quiz",
-					is_active: 1,
+					is_active: true,
 				},
 				{
 					name: "tryout",
-					is_active: 1,
+					is_active: true,
 				},
 				{
 					name: "finalexam",
-					is_active: 1,
+					is_active: true,
 				},
 			],
 			{}
@@ -28,15 +28,15 @@ module.exports = {
 			[
 				{
 					name: "kecermatan",
-					is_active: 1,
+					is_active: true,
 				},
 				{
 					name: "kecerdasan",
-					is_active: 1,
+					is_active: true,
 				},
 				{
 					name: "kepribadian",
-					is_active: 1,
+					is_active: true,
 				},
 			],
 			{}
