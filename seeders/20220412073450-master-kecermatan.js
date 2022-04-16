@@ -5,7 +5,7 @@ const { Category_test } = require("../models");
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.bulkInsert(
-			"exam_types",
+			"Exam_types",
 			[
 				{
 					name: "quiz",
@@ -24,7 +24,7 @@ module.exports = {
 		);
 
 		await queryInterface.bulkInsert(
-			"category_tests",
+			"Category_tests",
 			[
 				{
 					name: "kecermatan",
@@ -43,7 +43,7 @@ module.exports = {
 		);
 
 		await queryInterface.bulkInsert(
-			"category_subjects",
+			"Category_subjects",
 			[
 				{
 					name: "Akademik",
@@ -63,7 +63,7 @@ module.exports = {
 		};
 
 		await queryInterface.bulkInsert(
-			"psikotests",
+			"Psikotests",
 			[
 				{
 					name: "Psikotest Kecermatan",
@@ -80,7 +80,7 @@ module.exports = {
 		);
 
 		await queryInterface.bulkInsert(
-			"access_codes",
+			"Access_codes",
 			[
 				{
 					user_id: 1,
