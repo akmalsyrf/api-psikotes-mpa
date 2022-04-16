@@ -4,7 +4,7 @@ const { Category_character, Category_measurement } = require("../models");
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.bulkInsert(
-			"category_measurements",
+			"Category_measurements",
 			[
 				{
 					name: "Pikiran",
@@ -35,7 +35,7 @@ module.exports = {
 		};
 
 		await queryInterface.bulkInsert(
-			"measurements",
+			"Measurements",
 			[
 				{
 					name: "Introvert",
@@ -82,7 +82,7 @@ module.exports = {
 		);
 
 		await queryInterface.bulkInsert(
-			"category_characters",
+			"Category_characters",
 			[
 				{
 					name: "Analisis",
@@ -110,7 +110,7 @@ module.exports = {
 		};
 
 		await queryInterface.bulkInsert(
-			"character_personalities",
+			"Character_personalities",
 			[
 				//analisis
 				{
@@ -348,7 +348,7 @@ module.exports = {
 		);
 
 		await queryInterface.bulkInsert(
-			"charhasmeas",
+			"CharHasMeas",
 			[
 				{
 					character_id: 1,
